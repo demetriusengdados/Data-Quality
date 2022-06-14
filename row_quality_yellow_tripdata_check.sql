@@ -5,5 +5,5 @@ SELECT vendor_id, pickup_datetime,
   CASE WHEN trip_distance >= 0 AND trip_distance <= 100 THEN 1 ELSE 0 END AS trip_distance_check,
   CASE WHEN ROUND((fare_amount + extra + mta_tax + tip_amount + improvement_surcharge + COALESCE(congestion_surcharge, 0)), 1) = ROUND(total_amount, 1) THEN 1
        WHEN ROUND(fare_amount + extra + mta_tax + tip_amount + improvement_surcharge, 1) = ROUND(total_amount, 1) THEN 1 ELSE 0 END AS fare_check
-FROM {{ params.table }}
-WHERE pickup_datetime IN (SELECT pickup_datetime FROM {{ params.table }} ORDER BY RANDOM() LIMIT 1)
+FROM {{ var.json.aws_configs.redshift_table }}
+WHERE pickup_datetime IN (SELECT pickup_datetime FROM {{ var.json.aws_configs.redshift_table }} ORDER BY RANDOM() LIMIT 1)
