@@ -1,1 +1,12 @@
-uncommitted/
+.git
+.env
+airflow_settings.yaml
+*.pyc
+*/__pycache__/*
+.vim/
+Pip*
+*DS_Store
+include/gcloud_key/*
+venv/*
+dag_graph_generator.py
+task_dependency_tree.json
